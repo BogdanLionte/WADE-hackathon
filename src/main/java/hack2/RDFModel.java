@@ -77,6 +77,16 @@ public class RDFModel {
         return null;
     }
 
+    FundamentalDomain getFundamentalDomainById(Integer id) {
+        for(FundamentalDomain fundamentalDomain : fundamentalDomains) {
+            if (id.equals(fundamentalDomain.getId())) {
+                return fundamentalDomain;
+            }
+        }
+
+        return null;
+    }
+
     private Model model;
 
     public void createModel() {
