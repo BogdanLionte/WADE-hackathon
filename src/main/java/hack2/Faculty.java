@@ -2,19 +2,19 @@ package hack2;
 
 public class Faculty {
 
-    private int rmuId;
+    private int rmuID;
     private String name;
     private String university;
     private int universityId;
     private int isDoctoralSchool;
     private int year;
 
-    public int getRmuId() {
-        return rmuId;
+    public int getRmuID() {
+        return rmuID;
     }
 
-    public void setRmuId(int rmuId) {
-        this.rmuId = rmuId;
+    public void setRmuID(int rmuID) {
+        this.rmuID = rmuID;
     }
 
     public String getName() {

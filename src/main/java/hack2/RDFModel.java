@@ -28,7 +28,7 @@ public class RDFModel {
 
     Faculty getFacultyById(Integer id) {
         for(Faculty faculty : faculties) {
-            if (id == faculty.getRmuId()) {
+            if (id == faculty.getRmuID()) {
                 return faculty;
             }
         }
