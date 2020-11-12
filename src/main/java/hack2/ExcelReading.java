@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
@@ -22,6 +25,7 @@ public class ExcelReading {
     private static List<University> readUniversities(Workbook wb) {
         Sheet sheet = wb.getSheetAt(0);
         List<University> result = new ArrayList<>();
+        //skip the first row as that is the column names
         for(int i = 1; i < sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
             if(row != null) {
