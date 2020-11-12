@@ -12,6 +12,21 @@ public class University {
     private int year;
     private String webAddress;
 
+    public University(int rmuID, String name, String code, String county, int countyId, String city, int cityId, int year, String webAddress) {
+        this.rmuID = rmuID;
+        this.name = name;
+        this.code = code;
+        this.county = county;
+        this.countyId = countyId;
+        this.city = city;
+        this.cityId = cityId;
+        this.year = year;
+        this.webAddress = webAddress;
+    }
+
+    public University() {
+    }
+
     public int getRmuID() {
         return rmuID;
     }
