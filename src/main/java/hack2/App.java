@@ -14,5 +14,4 @@ public class App {
         rdfModel.writeModel();
     }
 
-
 }

@@ -6,9 +6,11 @@ public class StudyDomain {
 
     String name;
 
-    FundamentalDomain fundamentalDomain;
+    Integer fundamentalDomainId;
+    String fundamentalDomainName;
 
-    ScienceBranch scienceBranch;
+    Integer scienceBranchId;
+    String scienceBranchName;
 
     Boolean isLicenta;
 
@@ -18,15 +20,49 @@ public class StudyDomain {
 
     Integer year;
 
-    public StudyDomain(Integer id, String name, FundamentalDomain fundamentalDomain, ScienceBranch scienceBranch, Boolean isLicenta, Boolean isMaster, Boolean isDoctorat, Integer year) {
+    public StudyDomain(Integer id, String name, Integer fundamentalDomainId, String fundamentalDomainName, Integer scienceBranchId, String scienceBranchName, Boolean isLicenta, Boolean isMaster, Boolean isDoctorat, Integer year) {
         this.id = id;
         this.name = name;
-        this.fundamentalDomain = fundamentalDomain;
-        this.scienceBranch = scienceBranch;
+        this.fundamentalDomainId = fundamentalDomainId;
+        this.fundamentalDomainName = fundamentalDomainName;
+        this.scienceBranchId = scienceBranchId;
+        this.scienceBranchName = scienceBranchName;
         this.isLicenta = isLicenta;
         this.isMaster = isMaster;
         this.isDoctorat = isDoctorat;
         this.year = year;
+    }
+
+    public Integer getFundamentalDomainId() {
+        return fundamentalDomainId;
+    }
+
+    public void setFundamentalDomainId(Integer fundamentalDomainId) {
+        this.fundamentalDomainId = fundamentalDomainId;
+    }
+
+    public String getFundamentalDomainName() {
+        return fundamentalDomainName;
+    }
+
+    public void setFundamentalDomainName(String fundamentalDomainName) {
+        this.fundamentalDomainName = fundamentalDomainName;
+    }
+
+    public Integer getScienceBranchId() {
+        return scienceBranchId;
+    }
+
+    public void setScienceBranchId(Integer scienceBranchId) {
+        this.scienceBranchId = scienceBranchId;
+    }
+
+    public String getScienceBranchName() {
+        return scienceBranchName;
+    }
+
+    public void setScienceBranchName(String scienceBranchName) {
+        this.scienceBranchName = scienceBranchName;
     }
 
     public Integer getId() {
@@ -43,22 +79,6 @@ public class StudyDomain {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public FundamentalDomain getFundamentalDomain() {
-        return fundamentalDomain;
-    }
-
-    public void setFundamentalDomain(FundamentalDomain fundamentalDomain) {
-        this.fundamentalDomain = fundamentalDomain;
-    }
-
-    public ScienceBranch getScienceBranch() {
-        return scienceBranch;
-    }
-
-    public void setScienceBranch(ScienceBranch scienceBranch) {
-        this.scienceBranch = scienceBranch;
     }
 
     public Boolean getLicenta() {

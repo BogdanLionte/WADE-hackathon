@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
@@ -21,19 +18,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
  * @author Munawwar
  */
 public class ExcelReading {
-
-    public static void echoAsCSV(Sheet sheet) {
-        Row row = null;
-        for (int i = 0; i < sheet.getLastRowNum(); i++) {
-            row = sheet.getRow(i);
-            if(row != null) {
-                for (int j = 0; j < row.getLastCellNum(); j++) {
-                    System.out.print("\"" + row.getCell(j) + "\";");
-                }
-            }
-            System.out.println();
-        }
-    }
 
     private static List<University> readUniversities(Workbook wb) {
         Sheet sheet = wb.getSheetAt(0);
