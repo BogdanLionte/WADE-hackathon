@@ -38,7 +38,7 @@ public class RDFModel {
 
     StudyProgramme getStudyProgrammeById(Integer id) {
         for(StudyProgramme studyProgramme : studyProgrammes) {
-            if (id == studyProgramme.getRmuId()) {
+            if (id == studyProgramme.getRmuID()) {
                 return studyProgramme;
             }
         }
