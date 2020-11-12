@@ -13,13 +13,9 @@ import java.util.logging.Logger;
 
 import org.apache.poi.ss.usermodel.*;
 
-/**
- *
- * @author Munawwar
- */
 public class ExcelReading {
 
-    private static List<University> readUniversities(Workbook wb) {
+    public static List<University> readUniversities(Workbook wb) {
         Sheet sheet = wb.getSheetAt(0);
         List<University> result = new ArrayList<>();
         //skip the first row as that is the column names

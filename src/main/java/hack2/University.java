@@ -27,6 +27,20 @@ public class University {
     public University() {
     }
 
+    public String getType() {
+        if (code != null && code.length() > 0) {
+            return code.substring(0, 1);
+        }
+
+        return "n/a";
+
+    }
+
+    public University(int rmuID, String name) {
+        this.rmuID = rmuID;
+        this.name = name;
+    }
+
     public int getRmuID() {
         return rmuID;
     }

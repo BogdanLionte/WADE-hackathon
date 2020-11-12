@@ -1,9 +1,21 @@
 package hack2;
 
 import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.query.*;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static hack2.ExcelReading.readFaculties;
+import static hack2.ExcelReading.readUniversities;
 
 public class RDFModel {
 
@@ -15,6 +27,78 @@ public class RDFModel {
     List<FundamentalDomain> fundamentalDomains = new ArrayList<>();
     List<ScienceBranch> scienceBranches = new ArrayList<>();
 
+    public RDFModel() {
+        InputStream inp = null;
+        try {
+            inp = new FileInputStream("src/main/java/hack2/data.xlsx");
+            Workbook wb = WorkbookFactory.create(inp);
+
+            universityList = readUniversities(wb);
+            faculties = readFaculties(wb);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ExcelReading.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ExcelReading.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                inp.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ExcelReading.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private Model model;
+
+    public void createModel() {
+        model = ModelFactory.createDefaultModel();
+        String ns = "http://www.example.org/";
+        String facultyNS = "http://www.example.org/Faculties/";
+        String universityNS = "http://www.example.org/Universities/";
+        String cityNS = "http://www.example.org/Cities/";
+        String universityTypeNS = "http://www.example.org/UniversityType/";
+        String studyDomainNS = "http://www.example.org/StudyDomain/";
+        String specializationNS = "http://www.example.org/Specialization/";
+
+        for (Faculty faculty : faculties) {
+            addStatement(facultyNS+faculty.getName(), ns+"belongsTo", universityNS+getUniversityById(faculty.getUniversityId()).getName());
+            addStatement(facultyNS+faculty.getName(), ns+"isInCity", cityNS+getUniversityById(faculty.getUniversityId()).getCity());
+        }
+
+        for (University university : universityList) {
+            addStatement(facultyNS+university.getName(), ns+"type", universityTypeNS+university.getType());
+        }
+
+        for (StudyDomain studyDomain : studyDomains) {
+            addStatement(studyDomainNS+studyDomain.getName(), "hasSpecialization", specializationNS+getScienceBranchById(studyDomain.getScienceBranchId()).getName());
+        }
+
+//        StringBuilder queryStr = new StringBuilder();
+//        queryStr.append("SELECT ?university ");
+//        queryStr.append("WHERE ");
+//        queryStr.append("{ ");
+//        queryStr.append("<http://www.example.org/Universities/> ?p ?o ");
+//        queryStr.append("} ");
+//
+//        Query query = QueryFactory.create(queryStr.toString());
+//        QueryExecution qe = QueryExecutionFactory.create(query);
+//        ResultSet results = qe.execSelect();
+//        ResultSetFormatter.out(System.out, results, query);
+//        qe.close();
+
+    }
+
+    public void addStatement(String s, String p, String o) {
+        Resource subject = model.createResource(s);
+        Property predicate = model.createProperty(p);
+        RDFNode object = model.createResource(o);
+        Statement stmt = model.createStatement(subject, predicate, object);
+        model.add(stmt);
+    }
+
+    public void writeModel(){
+        model.write(System.out, "RDF/XML");
+    }
 
     University getUniversityById(Integer id) {
         for(University university : universityList) {
@@ -85,30 +169,6 @@ public class RDFModel {
         }
 
         return null;
-    }
-
-    private Model model;
-
-    public void createModel() {
-        model = ModelFactory.createDefaultModel();
-        String ns = "http://www.example.org#";
-        String nsRDFS = "http://www.w3.org/2000/01/rdf-schema#";
-
-        addStatement(ns+"Faculty", nsRDFS+"belongsTo", ns+"University");
-
-
-    }
-
-    public void addStatement(String s, String p, String o) {
-        Resource subject = model.createResource(s);
-        Property predicate = model.createProperty(p);
-        RDFNode object = model.createResource(o);
-        Statement stmt = model.createStatement(subject, predicate, object);
-        model.add(stmt);
-    }
-
-    public void writeModel(){
-        model.write(System.out, "RDF/XML");
     }
 
 }
