@@ -6,20 +6,34 @@ public class ScienceBranch {
 
     String name;
 
-    FundamentalDomain fundamentalDomain;
+    Integer fundamentalDomainId;
+    String fundamentalDomainName;
 
-    public ScienceBranch(Integer id, String name, FundamentalDomain fundamentalDomain) {
+    public ScienceBranch(Integer id, String name, Integer fundamentalDomainId, String fundamentalDomainName) {
         this.id = id;
         this.name = name;
-        this.fundamentalDomain = fundamentalDomain;
-    }
-
-    public Integer getId() {
-        return id;
+        this.fundamentalDomainId = fundamentalDomainId;
+        this.fundamentalDomainName = fundamentalDomainName;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getFundamentalDomainId() {
+        return fundamentalDomainId;
+    }
+
+    public void setFundamentalDomainId(Integer fundamentalDomainId) {
+        this.fundamentalDomainId = fundamentalDomainId;
+    }
+
+    public String getFundamentalDomainName() {
+        return fundamentalDomainName;
+    }
+
+    public void setFundamentalDomainName(String fundamentalDomainName) {
+        this.fundamentalDomainName = fundamentalDomainName;
     }
 
     public String getName() {
@@ -30,11 +44,9 @@ public class ScienceBranch {
         this.name = name;
     }
 
-    public FundamentalDomain getFundamentalDomain() {
-        return fundamentalDomain;
+    public Integer getId() {
+        return id;
     }
 
-    public void setFundamentalDomain(FundamentalDomain fundamentalDomain) {
-        this.fundamentalDomain = fundamentalDomain;
-    }
+
 }

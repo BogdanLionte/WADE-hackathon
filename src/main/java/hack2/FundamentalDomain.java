@@ -8,7 +8,6 @@ public class FundamentalDomain {
 
     Integer year;
 
-
     public FundamentalDomain(Integer id, String name, Integer year) {
         this.id = id;
         this.name = name;
